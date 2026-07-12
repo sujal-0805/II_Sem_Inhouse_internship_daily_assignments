@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Directory | Academic Portal</title>
+    
+    <!-- Meta tags for SEO -->
+    <meta name="description" content="A premium, dark-themed responsive Student Directory dashboard. Filter and search students with dynamic jQuery effects.">
+    <meta name="keywords" content="student directory, responsive grid, dark mode, jquery dashboard">
+    
+    <!-- Google Fonts: Outfit & Plus Jakarta Sans -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="glow-bg"></div>
+    
+    <div class="app-container">
+        <!-- Header Section -->
+        <header class="app-header">
+            <div class="header-logo">
+                <div class="logo-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M4.26 10.147a60.436 60.436 0 00-.491 6.347A48.62 48.62 0 0112 20.904a48.62 48.62 0 018.232-4.41 60.46 60.46 0 00-.491-6.347m-15.482 0a50.57 50.57 0 00-2.658-.813A5.905 5.905 0 018 3.988.89.89 0 019 3h6c.548 0 1.07.195 1.488.55a5.905 5.905 0 013.595 5.334 50.57 50.57 0 00-2.658.813m-11.948 0C4.583 10.437 8 12.5 12 12.5s7.417-2.063 8.707-3.098m-17.414 0L12 14.5l8.707-4.902L20.5 16.5A2.5 2.5 0 0118 19H6a2.5 2.5 0 01-2.5-2.5l-.207-6.853z" />
+                    </svg>
+                </div>
+                <h1>Student Directory</h1>
+            </div>
+            <p class="header-subtitle">Manage, search, and view academic records of all students in real-time.</p>
+        </header>
+
+        <!-- Search and Filter Controls -->
+        <section class="controls-panel">
+            <!-- Search Bar -->
+            <div class="search-wrapper">
+                <div class="search-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
+                    </svg>
+                </div>
+                <input type="text" id="search-input" placeholder="Search by name, major, or email..." aria-label="Search students">
+                <button type="button" id="clear-search" class="clear-btn" aria-label="Clear search" style="display: none;">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
+            </div>
+
+            <!-- Filter Buttons -->
+            <div class="filter-wrapper">
+                <button class="filter-btn active" data-filter="all">All</button>
+                <button class="filter-btn" data-filter="undergraduate">Undergraduate</button>
+                <button class="filter-btn" data-filter="graduate">Graduate</button>
+            </div>
+        </section>
+
+        <!-- Results Counter -->
+        <div class="results-meta">
+            <span class="count-badge"><span id="student-count">0</span> Students found</span>
+        </div>
+
+        <!-- Student Grid -->
+        <main class="student-grid" id="student-grid">
+            <!-- Card 1 -->
+            <article class="card" data-level="undergraduate" data-name="alex morgan" data-major="computer science">
+                <div class="card-glow"></div>
+                <div class="card-header">
+                    <div class="avatar-wrapper avatar-purple">
+                        <span>AM</span>
+                    </div>
+                    <div class="badge undergraduate-badge">Undergrad</div>
+                </div>
+                
+                <div class="card-body">
+                    <h3>Alex Morgan</h3>
+                    <p class="major-text">Computer Science</p>
+                    <p class="year-text">Junior, Class of 2027</p>
+                </div>
+                
+                <!-- Hidden Details Section -->
+                <div class="details" style="display: none;">
+                    <div class="details-divider"></div>
+                    <div class="detail-item">
+                        <span class="detail-label">Email</span>
+                        <span class="detail-value">alex.morgan@university.edu</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">GPA</span>
+                        <span class="detail-value gpa-highlight">3.85 / 4.00</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">Bio</span>
+                        <p class="detail-bio">Passionate about AI/ML and open-source development. Loves hiking and coffee.</p>
+                    </div>
+                </div>
+
+                <div class="card-footer">
+                    <button class="toggle-details-btn">Show Details</button>
+                </div>
+            </article>
+
+            <!-- Card 2 -->
+            <article class="card" data-level="graduate" data-name="sarah chen" data-major="data science">
+                <div class="card-glow"></div>
+                <div class="card-header">
+                    <div class="avatar-wrapper avatar-cyan">
+                        <span>SC</span>
+                    </div>
+                    <div class="badge graduate-badge">Graduate</div>
+                </div>
+                
+                <div class="card-body">
+                    <h3>Sarah Chen</h3>
+                    <p class="major-text">Data Science</p>
+                    <p class="year-text">1st Year MS</p>
+                </div>
+                
+                <div class="details" style="display: none;">
+                    <div class="details-divider"></div>
+                    <div class="detail-item">
+                        <span class="detail-label">Email</span>
+                        <span class="detail-value">sarah.chen@university.edu</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">GPA</span>
+                        <span class="detail-value gpa-highlight">3.92 / 4.00</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">Bio</span>
+                        <p class="detail-bio">Researching neural networks and NLP models. Former data analyst at TechCorp.</p>
+                    </div>
+                </div>
+
+                <div class="card-footer">
+                    <button class="toggle-details-btn">Show Details</button>
+                </div>
+            </article>
+
+            <!-- Card 3 -->
+            <article class="card" data-level="undergraduate" data-name="marcus johnson" data-major="mechanical engineering">
+                <div class="card-glow"></div>
+                <div class="card-header">
+                    <div class="avatar-wrapper avatar-orange">
+                        <span>MJ</span>
+                    </div>
+                    <div class="badge undergraduate-badge">Undergrad</div>
+                </div>
+                
+                <div class="card-body">
+                    <h3>Marcus Johnson</h3>
+                    <p class="major-text">Mechanical Engineering</p>
+                    <p class="year-text">Senior, Class of 2026</p>
+                </div>
+                
+                <div class="details" style="display: none;">
+                    <div class="details-divider"></div>
+                    <div class="detail-item">
+                        <span class="detail-label">Email</span>
+                        <span class="detail-value">marcus.j@university.edu</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">GPA</span>
+                        <span class="detail-value gpa-highlight">3.65 / 4.00</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">Bio</span>
+                        <p class="detail-bio">Focuses on robotics and automation systems. Team captain of the university Rover Project.</p>
+                    </div>
+                </div>
+
+                <div class="card-footer">
+                    <button class="toggle-details-btn">Show Details</button>
+                </div>
+            </article>
+
+            <!-- Card 4 -->
+            <article class="card" data-level="graduate" data-name="elena rostova" data-major="physics">
+                <div class="card-glow"></div>
+                <div class="card-header">
+                    <div class="avatar-wrapper avatar-emerald">
+                        <span>ER</span>
+                    </div>
+                    <div class="badge graduate-badge">Graduate</div>
+                </div>
+                
+                <div class="card-body">
+                    <h3>Elena Rostova</h3>
+                    <p class="major-text">Physics</p>
+                    <p class="year-text">3rd Year PhD</p>
+                </div>
+                
+                <div class="details" style="display: none;">
+                    <div class="details-divider"></div>
+                    <div class="detail-item">
+                        <span class="detail-label">Email</span>
+                        <span class="detail-value">elena.r@university.edu</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">GPA</span>
+                        <span class="detail-value gpa-highlight">3.98 / 4.00</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">Bio</span>
+                        <p class="detail-bio">Studying quantum computing algorithms. Loves playing classical piano in her free time.</p>
+                    </div>
+                </div>
+
+                <div class="card-footer">
+                    <button class="toggle-details-btn">Show Details</button>
+                </div>
+            </article>
+
+            <!-- Card 5 -->
+            <article class="card" data-level="undergraduate" data-name="david kim" data-major="biology">
+                <div class="card-glow"></div>
+                <div class="card-header">
+                    <div class="avatar-wrapper avatar-indigo">
+                        <span>DK</span>
+                    </div>
+                    <div class="badge undergraduate-badge">Undergrad</div>
+                </div>
+                
+                <div class="card-body">
+                    <h3>David Kim</h3>
+                    <p class="major-text">Biology</p>
+                    <p class="year-text">Sophomore, Class of 2028</p>
+                </div>
+                
+                <div class="details" style="display: none;">
+                    <div class="details-divider"></div>
+                    <div class="detail-item">
+                        <span class="detail-label">Email</span>
+                        <span class="detail-value">d.kim@university.edu</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">GPA</span>
+                        <span class="detail-value gpa-highlight">3.70 / 4.00</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">Bio</span>
+                        <p class="detail-bio">Pre-med student volunteering at the local clinic. Passionate about marine biology.</p>
+                    </div>
+                </div>
+
+                <div class="card-footer">
+                    <button class="toggle-details-btn">Show Details</button>
+                </div>
+            </article>
+
+            <!-- Card 6 -->
+            <article class="card" data-level="graduate" data-name="aisha patel" data-major="electrical engineering">
+                <div class="card-glow"></div>
+                <div class="card-header">
+                    <div class="avatar-wrapper avatar-rose">
+                        <span>AP</span>
+                    </div>
+                    <div class="badge graduate-badge">Graduate</div>
+                </div>
+                
+                <div class="card-body">
+                    <h3>Aisha Patel</h3>
+                    <p class="major-text">Electrical Engineering</p>
+                    <p class="year-text">2nd Year MS</p>
+                </div>
+                
+                <div class="details" style="display: none;">
+                    <div class="details-divider"></div>
+                    <div class="detail-item">
+                        <span class="detail-label">Email</span>
+                        <span class="detail-value">aisha.patel@university.edu</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">GPA</span>
+                        <span class="detail-value gpa-highlight">3.88 / 4.00</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">Bio</span>
+                        <p class="detail-bio">Specializing in IoT devices and smart grids. Enjoys painting and photography.</p>
+                    </div>
+                </div>
+
+                <div class="card-footer">
+                    <button class="toggle-details-btn">Show Details</button>
+                </div>
+            </article>
+
+            <!-- Card 7 -->
+            <article class="card" data-level="undergraduate" data-name="liam o'connor" data-major="finance & economics">
+                <div class="card-glow"></div>
+                <div class="card-header">
+                    <div class="avatar-wrapper avatar-amber">
+                        <span>LO</span>
+                    </div>
+                    <div class="badge undergraduate-badge">Undergrad</div>
+                </div>
+                
+                <div class="card-body">
+                    <h3>Liam O'Connor</h3>
+                    <p class="major-text">Finance & Economics</p>
+                    <p class="year-text">Senior, Class of 2026</p>
+                </div>
+                
+                <div class="details" style="display: none;">
+                    <div class="details-divider"></div>
+                    <div class="detail-item">
+                        <span class="detail-label">Email</span>
+                        <span class="detail-value">liam.oc@university.edu</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">GPA</span>
+                        <span class="detail-value gpa-highlight">3.58 / 4.00</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">Bio</span>
+                        <p class="detail-bio">Interested in algorithmic trading and macroeconomics. Avid tennis player.</p>
+                    </div>
+                </div>
+
+                <div class="card-footer">
+                    <button class="toggle-details-btn">Show Details</button>
+                </div>
+            </article>
+
+            <!-- Card 8 -->
+            <article class="card" data-level="undergraduate" data-name="sofia alvarez" data-major="graphic design">
+                <div class="card-glow"></div>
+                <div class="card-header">
+                    <div class="avatar-wrapper avatar-fuchsia">
+                        <span>SA</span>
+                    </div>
+                    <div class="badge undergraduate-badge">Undergrad</div>
+                </div>
+                
+                <div class="card-body">
+                    <h3>Sofia Alvarez</h3>
+                    <p class="major-text">Graphic Design</p>
+                    <p class="year-text">Sophomore, Class of 2028</p>
+                </div>
+                
+                <div class="details" style="display: none;">
+                    <div class="details-divider"></div>
+                    <div class="detail-item">
+                        <span class="detail-label">Email</span>
+                        <span class="detail-value">sofia.a@university.edu</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">GPA</span>
+                        <span class="detail-value gpa-highlight">3.78 / 4.00</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">Bio</span>
+                        <p class="detail-bio">UI/UX designer focusing on accessible web interfaces. Freelance illustrator.</p>
+                    </div>
+                </div>
+
+                <div class="card-footer">
+                    <button class="toggle-details-btn">Show Details</button>
+                </div>
+            </article>
+        </main>
+
+        <!-- No Results Fallback -->
+        <div id="no-results" class="no-results" style="display: none;">
+            <div class="no-results-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
+                </svg>
+            </div>
+            <h3>No students found</h3>
+            <p>We couldn't find any matches matching your search or filters. Try adjusting your search query.</p>
+        </div>
+
+        <!-- Footer -->
+        <footer class="app-footer">
+            <p>&copy; 2026 Academic Portal Directory. Engineered with premium Web Aesthetics & jQuery.</p>
+        </footer>
+    </div>
+
+    <!-- jQuery Library (CDN) -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <!-- Custom Script -->
+    <script src="script.js"></script>
+</body>
+</html>

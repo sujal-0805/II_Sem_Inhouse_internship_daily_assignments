@@ -1,0 +1,83 @@
+:root {
+    --primary: #4f46e5;
+    --secondary: #0f172a;
+    --accent: #eef2ff;
+}
+
+body {
+    background: linear-gradient(135deg, #f8fafc 0%, #eef2ff 100%);
+    min-height: 100vh;
+    color: #0f172a;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.auth-page {
+    display: flex;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.card {
+    border: none;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 0.75rem 1.5rem rgba(15, 23, 42, 0.12) !important;
+}
+
+.auth-icon {
+    width: 64px;
+    height: 64px;
+    margin: 0 auto;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--primary), #6366f1);
+    color: #fff;
+    font-size: 1.6rem;
+}
+
+.stat-icon {
+    width: 50px;
+    height: 50px;
+    border-radius: 14px;
+    display: grid;
+    place-items: center;
+    font-size: 1.2rem;
+}
+
+.avatar-sm {
+    width: 48px;
+    height: 48px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 2px solid #e2e8f0;
+}
+
+.avatar-preview {
+    width: 96px;
+    height: 96px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 2px solid #e2e8f0;
+}
+
+.fade-in {
+    animation: fadeIn 0.5s ease-in;
+}
+
+.slide-up {
+    animation: slideUp 0.45s ease-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes slideUp {
+    from { transform: translateY(12px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}

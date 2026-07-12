@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="A premium and responsive user directory application fetching and filtering blog posts dynamically from JSONPlaceholder.">
+  <title>Post Directory | API Portal</title>
+  
+  <!-- Bootstrap 5 CSS CDN -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  <!-- Bootstrap Icons CDN -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <!-- Custom CSS stylesheet -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Sticky Glassmorphic Header -->
+  <header class="glass-header shadow-sm mb-4">
+    <nav class="navbar navbar-expand-lg py-3">
+      <div class="container d-flex justify-content-between align-items-center">
+        <!-- Brand logo and Title -->
+        <a class="navbar-brand d-flex align-items-center text-decoration-none" href="#">
+          <div class="bg-primary text-white d-flex align-items-center justify-content-center rounded-3 me-2" style="width: 40px; height: 40px;">
+            <i class="bi bi-folder2-open fs-5"></i>
+          </div>
+          <div>
+            <h1 class="h5 mb-0 text-primary-emphasis display-font">PostHub</h1>
+            <small class="text-secondary" style="font-size: 0.75rem;">User Directory API</small>
+          </div>
+        </a>
+
+        <!-- Controls (Counter & Theme Switcher) -->
+        <div class="d-flex align-items-center gap-3">
+          <!-- Live Count Badge -->
+          <div class="d-none d-sm-flex align-items-center bg-body-secondary px-3 py-2 rounded-3 border">
+            <i class="bi bi-activity text-primary me-2 animate-pulse"></i>
+            <span class="text-secondary small fw-medium" id="count-badge-text">
+              Loading posts...
+            </span>
+          </div>
+          
+          <!-- Dark Mode Toggle Button -->
+          <button id="theme-toggle" class="theme-toggle-btn" aria-label="Toggle light/dark theme">
+            <i class="bi bi-moon-stars" id="theme-icon"></i>
+          </button>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Main Body Content -->
+  <main class="container my-3 flex-grow-1">
+    
+    <!-- Controls Dashboard Card -->
+    <div class="card border border-0 shadow-sm mb-4 p-4 rounded-4 bg-body-tertiary">
+      <div class="row align-items-center g-3">
+        <!-- Title and description -->
+        <div class="col-md-7">
+          <h2 class="h4 mb-1 display-font">Search Directory</h2>
+          <p class="text-secondary mb-0 small">Filter user posts in real-time by keyword in their titles. Dynamic search highlights matches instantly.</p>
+        </div>
+        <!-- Live Search Field -->
+        <div class="col-md-5">
+          <div class="search-container">
+            <i class="bi bi-search search-icon"></i>
+            <input type="text" id="search-input" class="form-control search-input" placeholder="Search by post title..." disabled>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Live Mobile Count Badge -->
+    <div class="d-flex d-sm-none align-items-center bg-body-secondary px-3 py-2 rounded-3 border mb-4 justify-content-center">
+      <i class="bi bi-activity text-primary me-2"></i>
+      <span class="text-secondary small fw-medium" id="count-badge-text-mobile">
+        Loading posts...
+      </span>
+    </div>
+
+    <!-- Error Handling Banner Container -->
+    <div id="error-container" class="alert alert-danger d-none p-4 rounded-4 shadow-sm align-items-start border-2 border-danger-subtle" role="alert">
+      <i class="bi bi-exclamation-triangle-fill fs-3 me-3 text-danger"></i>
+      <div>
+        <h4 class="alert-heading display-font fw-bold mb-1">Unable to load data</h4>
+        <p class="mb-3 text-danger-emphasis" id="error-message">A connection error occurred while requesting post resource. Check your network status and try again.</p>
+        <button id="retry-btn" class="btn btn-outline-danger btn-sm rounded-3 px-3">
+          <i class="bi bi-arrow-clockwise me-1"></i> Retry Connection
+        </button>
+      </div>
+    </div>
+
+    <!-- Posts Grid Row -->
+    <div id="posts-container" class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+      <!-- Skeleton Placeholder Cards are initially rendered here -->
+      <!-- These will be replaced dynamically by script.js -->
+    </div>
+  </main>
+
+  <!-- Details Bootstrap Modal -->
+  <div class="modal fade" id="postDetailModal" tabindex="-1" aria-labelledby="postDetailModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content modal-content-custom">
+        <div class="modal-header modal-header-custom align-items-center">
+          <div>
+            <span class="badge text-bg-primary rounded-pill mb-2" id="modal-user-badge">User 1</span>
+            <h3 class="modal-title h5 display-font fw-bold" id="postDetailModalLabel">Post Title</h3>
+          </div>
+          <button type="button" class="btn-close ms-auto" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body modal-body-custom">
+          <p class="text-secondary-emphasis lh-lg mb-0" id="modal-post-body">Post details content...</p>
+        </div>
+        <div class="modal-footer modal-footer-custom">
+          <button type="button" class="btn btn-secondary rounded-3 px-4" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Styled Sticky Footer -->
+  <footer class="py-4 mt-5">
+    <div class="container text-center">
+      <p class="mb-1 text-secondary-emphasis fw-semibold">Day 6 Directory Assignment</p>
+      <p class="mb-0 text-secondary" style="font-size: 0.8rem;">Powered by Bootstrap 5 &amp; Vanilla Javascript API fetch integration.</p>
+    </div>
+  </footer>
+
+  <!-- Bootstrap 5 Bundle JS CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+  <!-- Main Logic script -->
+  <script src="script.js"></script>
+</body>
+</html>

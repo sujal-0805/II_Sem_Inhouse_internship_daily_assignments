@@ -1,0 +1,331 @@
+/* 
+  Day 6 - User Directory Custom Styling System
+  Combines Bootstrap 5 utilities with a custom glassmorphism and light/dark theme system.
+*/
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@400;500;600;700;800&display=swap');
+
+/* Define Design System Tokens */
+:root {
+  --bg-primary: #f8fafc;
+  --bg-secondary: #ffffff;
+  --bg-tertiary: #f1f5f9;
+  --text-primary: #0f172a;
+  --text-secondary: #475569;
+  --accent-color: #4f46e5;
+  --accent-hover: #4338ca;
+  --accent-rgb: 79, 70, 229;
+  --border-color: #e2e8f0;
+  --card-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -4px rgba(0, 0, 0, 0.05);
+  --card-shadow-hover: 0 20px 25px -5px rgba(79, 70, 229, 0.1), 0 8px 10px -6px rgba(79, 70, 229, 0.05);
+  --glass-bg: rgba(255, 255, 255, 0.7);
+  --glass-border: rgba(226, 232, 240, 0.8);
+  --transition-speed: 0.3s;
+}
+
+[data-theme="dark"] {
+  --bg-primary: #090d16;
+  --bg-secondary: #111827;
+  --bg-tertiary: #1f2937;
+  --text-primary: #f8fafc;
+  --text-secondary: #94a3b8;
+  --accent-color: #818cf8;
+  --accent-hover: #a5b4fc;
+  --accent-rgb: 129, 140, 248;
+  --border-color: #1f2937;
+  --card-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3), 0 4px 6px -4px rgba(0, 0, 0, 0.2);
+  --card-shadow-hover: 0 20px 25px -5px rgba(129, 140, 248, 0.2), 0 8px 10px -6px rgba(129, 140, 248, 0.1);
+  --glass-bg: rgba(17, 24, 39, 0.7);
+  --glass-border: rgba(31, 41, 55, 0.8);
+}
+
+/* Global Elements & Typography Override */
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: 'Inter', sans-serif;
+  transition: background-color var(--transition-speed) ease, color var(--transition-speed) ease;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+h1, h2, h3, h4, h5, h6, .display-font {
+  font-family: 'Outfit', sans-serif;
+  font-weight: 600;
+}
+
+/* Custom Glassmorphism Header & Controls */
+.glass-header {
+  background: var(--glass-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--glass-border);
+  position: sticky;
+  top: 0;
+  z-index: 1020;
+  transition: background var(--transition-speed) ease, border var(--transition-speed) ease;
+}
+
+/* Search bar styling */
+.search-container {
+  position: relative;
+}
+
+.search-input {
+  background-color: var(--bg-secondary);
+  border: 2px solid var(--border-color);
+  color: var(--text-primary);
+  border-radius: 12px;
+  padding: 12px 20px 12px 45px;
+  font-size: 1rem;
+  transition: all var(--transition-speed) ease;
+}
+
+.search-input:focus {
+  background-color: var(--bg-secondary);
+  border-color: var(--accent-color);
+  box-shadow: 0 0 0 4px var(--glass-border), 0 0 15px rgba(var(--accent-rgb), 0.15);
+  color: var(--text-primary);
+  outline: none;
+}
+
+.search-icon {
+  position: absolute;
+  left: 18px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-secondary);
+  font-size: 1.1rem;
+  pointer-events: none;
+}
+
+/* Premium Card Components */
+.post-card {
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  box-shadow: var(--card-shadow);
+  transition: transform var(--transition-speed) cubic-bezier(0.175, 0.885, 0.32, 1.275),
+              box-shadow var(--transition-speed) ease,
+              border-color var(--transition-speed) ease,
+              background-color var(--transition-speed) ease;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  position: relative;
+}
+
+.post-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--card-shadow-hover);
+  border-color: var(--accent-color);
+}
+
+.post-card .card-body {
+  padding: 1.75rem;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.post-card .card-title {
+  color: var(--text-primary);
+  font-size: 1.2rem;
+  line-height: 1.4;
+  margin-bottom: 1rem;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  height: 3.36rem; /* 2 lines of text approx */
+  font-weight: 700;
+  transition: color var(--transition-speed) ease;
+}
+
+.post-card:hover .card-title {
+  color: var(--accent-color);
+}
+
+.post-card .card-text {
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+  line-height: 1.6;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  height: 4.8rem; /* 3 lines of text approx */
+  margin-bottom: 1.5rem;
+}
+
+.card-footer-custom {
+  background: transparent;
+  border-top: 1px solid var(--border-color);
+  padding: 1rem 1.75rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: auto;
+}
+
+/* User Badge styling */
+.user-badge {
+  background-color: var(--bg-tertiary);
+  color: var(--accent-color);
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 6px 12px;
+  border-radius: 30px;
+  border: 1px solid var(--border-color);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: all var(--transition-speed) ease;
+}
+
+.post-card:hover .user-badge {
+  background-color: var(--accent-color);
+  color: #ffffff;
+  border-color: var(--accent-color);
+}
+
+/* Read more button */
+.btn-read-more {
+  background: transparent;
+  color: var(--accent-color);
+  border: none;
+  font-size: 0.875rem;
+  font-weight: 600;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  transition: gap 0.2s ease, color 0.2s ease;
+}
+
+.btn-read-more:hover {
+  color: var(--accent-hover);
+  gap: 8px;
+}
+
+/* Search Term Highlight */
+.highlight {
+  background-color: rgba(253, 224, 71, 0.4);
+  color: inherit;
+  padding: 0 2px;
+  border-radius: 4px;
+  font-weight: inherit;
+}
+[data-theme="dark"] .highlight {
+  background-color: rgba(234, 179, 8, 0.35);
+  color: #ffffff;
+}
+
+/* Theme Toggle Button styling */
+.theme-toggle-btn {
+  background-color: var(--bg-tertiary);
+  border: 1px solid var(--border-color);
+  color: var(--text-primary);
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--transition-speed) ease;
+  cursor: pointer;
+}
+
+.theme-toggle-btn:hover {
+  background-color: var(--border-color);
+  transform: rotate(15deg);
+}
+
+.theme-toggle-btn i {
+  font-size: 1.25rem;
+  transition: transform var(--transition-speed) ease;
+}
+
+/* Skeleton Loading Animation */
+.skeleton-card {
+  pointer-events: none;
+}
+
+.skeleton-shimmer {
+  background: linear-gradient(
+    90deg,
+    var(--bg-secondary) 25%,
+    var(--bg-tertiary) 50%,
+    var(--bg-secondary) 75%
+  );
+  background-size: 200% 100%;
+  animation: loadingShimmer 1.5s infinite linear;
+}
+
+@keyframes loadingShimmer {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+.skeleton-text {
+  height: 12px;
+  margin-bottom: 8px;
+  border-radius: 4px;
+}
+
+.skeleton-title {
+  height: 20px;
+  margin-bottom: 16px;
+  border-radius: 6px;
+  width: 80%;
+}
+
+.skeleton-badge {
+  height: 24px;
+  width: 80px;
+  border-radius: 30px;
+}
+
+.skeleton-btn {
+  height: 20px;
+  width: 70px;
+  border-radius: 4px;
+}
+
+/* Custom styled Bootstrap Modal */
+.modal-content-custom {
+  background-color: var(--bg-secondary);
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
+  border-radius: 20px;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+}
+
+.modal-header-custom {
+  border-bottom: 1px solid var(--border-color);
+  padding: 1.5rem 2rem;
+}
+
+.modal-body-custom {
+  padding: 2rem;
+}
+
+.modal-footer-custom {
+  border-top: 1px solid var(--border-color);
+  padding: 1.25rem 2rem;
+}
+
+/* Sticky top footer */
+footer {
+  margin-top: auto;
+  border-top: 1px solid var(--border-color);
+  background-color: var(--bg-secondary);
+  color: var(--text-secondary);
+  font-size: 0.875rem;
+}
